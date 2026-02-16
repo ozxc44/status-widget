@@ -1,110 +1,46 @@
-# Contributing to Status Widget
+# Contributing to status-widget
 
-Thank you for your interest in contributing! This document provides guidelines and instructions for contributing to the Status Widget project.
+Thank you for considering contributing! This is a project by **Auto Company** — an autonomous AI company building useful developer tools.
 
-## Table of Contents
-- [Code of Conduct](#code-of-conduct)
-- [How to Contribute](#how-to-contribute)
-- [Development Setup](#development-setup)
-- [Pull Request Process](#pull-request-process)
-- [Coding Standards](#coding-standards)
+## Quick Start
 
-## Code of Conduct
+1. Check [existing issues](https://github.com/ozxc44/status-widget/issues) for ideas
+2. [Fork the repo](https://github.com/ozxc44/status-widget/fork)
+3. Create a branch: `git checkout -b my-feature`
+4. Make your changes
+5. [Open a Pull Request](https://github.com/ozxc44/status-widget/compare)
 
-This project adheres to a simple code of conduct:
-- Be respectful and inclusive
-- Focus on what is best for the community
-- Show empathy towards other community members
+## Good First Issues
 
-## How to Contribute
+Issues with the `good first issue` label are great for newcomers:
+https://github.com/ozxc44/status-widget/labels/good%20first%20issue
 
-### Reporting Bugs
-
-1. Check existing issues to avoid duplicates
-2. Use the bug report template
-3. Include steps to reproduce, expected vs actual behavior
-4. Provide environment details (Node version, deployment type, etc.)
-
-### Suggesting Features
-
-1. Check existing feature requests
-2. Use the feature request template
-3. Explain the problem your feature would solve
-4. Consider if it fits the project's scope
-
-### Submitting Code Changes
-
-1. Fork the repository
-2. Create a branch for your changes (`git checkout -b feature/your-feature`)
-3. Make your changes with clear commit messages
-4. Test your changes thoroughly
-5. Submit a pull request
-
-## Development Setup
+## Development
 
 ```bash
 # Clone your fork
-git clone https://github.com/your-username/status-widget.git
+git clone https://github.com/YOUR_USERNAME/status-widget.git
 cd status-widget
 
-# Install dependencies
-npm install
-
-# Start development server
-npm start
+# Install dependencies (if applicable)
+# Check the README for project-specific setup
 ```
 
-The development server runs on http://localhost:3001
+## About Auto Company
 
-## Pull Request Process
+This is one of 11+ open source projects by Auto Company. See our other work:
+- [auto-promoter](https://github.com/ozxc44/auto-promoter) — Auto-post to social media
+- [badge-generator](https://github.com/ozxc44/badge-generator) — Generate project badges
+- [docuapi](https://github.com/ozxc44/docuapi) — Document parsing API
+- [status-badge-2](https://github.com/ozxc44/status-badge-2) — Status badges for your projects
+- [status-widget](https://github.com/ozxc44/status-widget) — Status widgets
+- [queue-monitor-dev](https://github.com/ozxc44/queue-monitor-dev) — Queue monitoring
+- [cron-monitor](https://github.com/ozxc44/cron-monitor) — Cron job monitoring
+- [flatpdf-api](https://github.com/ozxc44/flatpdf-api) — PDF flattening API
+- [form-to-pdf](https://github.com/ozxc44/form-to-pdf) — Forms to PDF
+- [email-cleanup](https://github.com/ozxc44/email-cleanup) — Email categorization
+- [tiktok-compliance-scanner](https://github.com/ozxc44/tiktok-compliance-scanner) — Content compliance scanner
 
-1. Ensure your code follows the project's coding standards
-2. Update documentation if needed
-3. Add tests for new features (when applicable)
-4. Ensure all tests pass
-5. Use the PR template and fill out all relevant sections
-6. Keep PRs focused on a single change
+## License
 
-### PR Review Criteria
-
-- Code quality and clarity
-- Alignment with project goals
-- Documentation completeness
-- Test coverage
-- Performance implications
-
-## Coding Standards
-
-### JavaScript Style
-
-- Use meaningful variable and function names
-- Add comments for complex logic
-- Keep functions focused and small
-- Use async/await for asynchronous code
-
-### Commit Messages
-
-Follow conventional commits format:
-
-```
-type(scope): description
-
-[optional body]
-
-[optional footer]
-```
-
-Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
-
-Examples:
-- `feat(widget): add custom color scheme support`
-- `fix(monitor): handle timeout errors gracefully`
-- `docs: update deployment instructions`
-
-## Questions?
-
-Feel free to open an issue with the "Question" label if you need help or clarification.
-
----
-
-**Thank you for contributing to Status Widget!** 🚀
+By contributing, you agree that your contributions will be licensed under the MIT License.
