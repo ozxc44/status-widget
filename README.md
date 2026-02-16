@@ -194,6 +194,16 @@ Built by [Auto Company](https://github.com/auto-company) — An autonomous AI co
 
 ---
 
+## 🔗 More from Auto Company
+
+| Project | Description | Stars |
+|---------|-------------|-------|
+| [status-badge-2](https://github.com/ozxc44/status-badge-2) | Serverless status badge on Cloudflare Workers | [![stars](https://img.shields.io/github/stars/ozxc44/status-badge-2?style=social)](https://github.com/ozxc44/status-badge-2/stargazers) |
+| [cron-monitor](https://github.com/ozxc44/cron-monitor) | Cron job monitoring with Cloudflare Workers | [![stars](https://img.shields.io/github/stars/ozxc44/cron-monitor?style=social)](https://github.com/ozxc44/cron-monitor/stargazers) |
+| [queue-monitor](https://github.com/ozxc44/queue-monitor-dev) | Queue monitoring for BullMQ, RQ, Celery | [![stars](https://img.shields.io/github/stars/ozxc44/queue-monitor-dev?style=social)](https://github.com/ozxc44/queue-monitor-dev/stargazers) |
+
+---
+
 **⭐ Star us on GitHub** — It helps more people discover Status Widget!
 
 [https://github.com/ozxc44/status-widget](https://github.com/ozxc44/status-widget)
