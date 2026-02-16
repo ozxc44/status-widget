@@ -28,7 +28,17 @@
 
 ---
 
-## 🚀 30-Second Setup
+## 🚀 One-Click Deploy
+
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https://github.com/ozxc44/status-widget)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
+[![Remix on Glitch](https://cdn.glitch.com/2703b06e-7bf1-4506-904e-880ddcfe6f96%2Fremix-button.svg)](https://glitch.com/edit/#!/remix/status-widget)
+
+**30 seconds from zero to live monitoring.** No credit card required.
+
+---
+
+## 🛠️ Manual Setup
 
 ```bash
 # Clone
@@ -48,7 +58,7 @@ Visit http://localhost:3001
 
 ---
 
-## 📦 Deploy Anywhere
+## 📦 Other Deployment Options
 
 ### Deploy to Your Server
 
@@ -79,14 +89,14 @@ Requires Node.js. Configure `deploy.sh` with your server details.
 
 ## 📎 Embed on Your Site
 
-### Option 1: Script Tag (Recommended)
+### Script Tag (Recommended)
 
 ```html
 <script src="https://your-domain.com/widget.js?url=example.com"></script>
 <div id="status-widget"></div>
 ```
 
-### Option 2: iframe
+### iframe
 
 ```html
 <iframe src="https://your-domain.com/widget?url=example.com"
@@ -94,12 +104,17 @@ Requires Node.js. Configure `deploy.sh` with your server details.
 </iframe>
 ```
 
-### Result
+### What You Get
 
 A clean status badge showing:
-- 🟢 Online / 🔴 Offline
-- Response time in ms
-- "Powered by Status Widget" link
+- 🟢 **Status indicator** — Online / Offline
+- ⏱️ **Response time** — Real-time latency
+- 🔗 **Branded link** — "Powered by Status Widget"
+
+### Live Example
+
+Visit the demo page and open browser DevTools to see it in action:
+https://status.zhuzeyang.xyz/widget-demo
 
 ---
 
