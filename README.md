@@ -4,6 +4,9 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Cloudflare Workers](https://img.shields.io/badge/Cloudflare-Workers-orange)](https://workers.cloudflare.com/)
+[![Size](https://img.shields.io/github/languages/code-size/ozxc44/status-widget?style=flat)](https://github.com/ozxc44/status-widget)
+[![Stars](https://img.shields.io/github/stars/ozxc44/status-widget?style=social)](https://github.com/ozxc44/status-widget/stargazers)
+[![Statuspage.io Alternative](https://img.shields.io/badge/Alternative_to-Statuspage.io-blue)](https://www.statuspage.io/)
 
 ## ✨ Features
 
@@ -103,6 +106,12 @@ Response:
 ## 📄 License
 
 MIT — Free for personal and commercial use.
+
+## 🔗 Related Projects
+
+Also check out:
+- **[Queue Monitor](https://github.com/ozxc44/queue-monitor-dev)** — Queue alerting for RQ, Celery, BullMQ, Sidekiq
+- **[Cron Monitor](https://github.com/ozxc44/cron-monitor)** — Cron job monitoring and alerting
 
 ## 🙏 Acknowledgments
 
