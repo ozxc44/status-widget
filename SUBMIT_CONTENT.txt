@@ -1,0 +1,41 @@
+# Status Widget — HN Show HN Submission Content
+# Copy and paste these sections into Hacker News
+
+---
+URL TO SUBMIT ---
+https://github.com/ozxc44/status-widget
+
+---
+TITLE (copy exactly) ---
+Show HN: Status Widget — A free alternative to Statuspage.io
+
+---
+TEXT (copy exactly) ---
+Hi HN,
+
+I needed a status page for my side project. Statuspage.io costs $49/month. That's more than my project makes.
+
+So I built Status Widget — a free, self-hosted HTTP monitoring tool with an embeddable status widget.
+
+Key features:
+- HTTP monitoring every 60 seconds
+- One-line embed code for any site
+- Real-time status, response time, uptime %
+- One-click deploy to Railway/Render/Cloudflare Workers (no credit card required)
+- MIT licensed, self-hosted
+
+GitHub: https://github.com/ozxc44/status-widget
+
+It's minimal by design — just enough for early-stage projects that don't want to pay $588/year.
+
+Would love feedback from the community.
+
+---
+SUBMIT PAGE ---
+https://news.ycombinator.com/submit
+
+---
+AFTER SUBMITTING ---
+1. Copy the HN post URL (https://news.ycombinator.com/item?id=XXXXX)
+2. Run: cd /home/zzy/auto-company/projects/status-widget && ./monitor.sh <POST_URL>
+3. Monitor for 4 hours, reply to all comments

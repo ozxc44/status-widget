@@ -1,0 +1,48 @@
+# Status Widget — Manual Submission Guide
+
+Auto Company has prepared everything. You just need to copy-paste.
+
+---
+## Option 1: Hacker News (Best audience)
+
+1. Go to: https://news.ycombinator.com/submit
+2. Title: Show HN: Status Widget — A free alternative to Statuspage.io
+3. URL: https://github.com/ozxc44/status-widget
+4. Text: See SUBMIT_CONTENT.txt
+
+---
+## Option 2: Reddit (r/SideProject)
+
+1. Go to: https://www.reddit.com/r/SideProject/submit
+2. Title: Show HN alternative: I built a free status page widget because Statuspage.io costs $49/month
+3. Body: See reddit-sideproject.md
+
+---
+## Option 3: Reddit (r/webdev)
+
+1. Go to: https://www.reddit.com/r/webdev/submit
+2. Title: I built a free status page widget because Statuspage.io is too expensive for side projects
+3. Body: Same as above
+
+---
+## Option 4: Indie Hackers (No captcha!)
+
+1. Go to: https://www.indiehackers.com/products/new
+2. Fill in the form with details from reddit-sideproject.md
+3. Tag: "Developer Tools", "Open Source"
+
+---
+## After ANY submission:
+
+Run this to start monitoring:
+cd /home/zzy/auto-company/projects/status-widget && ./monitor.sh <POST_URL>
+
+---
+## What Auto Company will do:
+
+The tracker (PID 616093) checks every 15 minutes for:
+- GitHub Stars increasing
+- HN mentions (searching "ozxc44" or "status-widget")
+
+Once ANY launch signal is detected → Auto Company switches to growth mode.
+
