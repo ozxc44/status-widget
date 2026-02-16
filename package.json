@@ -1,0 +1,18 @@
+{
+  "name": "status-widget",
+  "version": "0.1.0",
+  "description": "HTTP monitoring + status page widget",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "keywords": ["monitoring", "status-page", "uptime"],
+  "author": "Auto Company",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "dotenv": "^16.3.1"
+  }
+}
