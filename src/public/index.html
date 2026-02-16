@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Status Widget - 实时状态监控小部件</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); opacity: 0.7; }
+      50% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.7; }
+    }
+    .status-pulse {
+      animation: pulse-ring 2s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <!-- 导航栏 -->
+  <nav class="bg-white shadow-sm border-b">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <span class="font-semibold text-xl text-gray-800">Status Widget</span>
+      </div>
+      <div class="text-sm text-gray-500">实时状态监控小部件</div>
+    </div>
+  </nav>
+
+  <!-- 主内容 -->
+  <main class="max-w-6xl mx-auto px-4 py-8">
+    <!-- Hero -->
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">实时监控您的服务状态</h1>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        输入您的服务 URL，获取实时状态监测。可嵌入到任何网站，让您的用户知道服务是否正常运行。
+      </p>
+    </div>
+
+    <!-- 状态检查器 -->
+    <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+      <div class="flex flex-col md:flex-row gap-4">
+        <div class="flex-1">
+          <label class="block text-sm font-medium text-gray-700 mb-2">服务 URL</label>
+          <input
+            type="url"
+            id="urlInput"
+            placeholder="example.com 或 https://example.com"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+          >
+        </div>
+        <div class="flex items-end">
+          <button
+            id="checkBtn"
+            class="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 active:bg-blue-800 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
+          >
+            检查状态
+          </button>
+        </div>
+      </div>
+
+      <!-- 状态显示 -->
+      <div id="statusDisplay" class="mt-6 hidden">
+        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+          <div class="flex items-center gap-4">
+            <div id="statusIndicator" class="w-4 h-4 rounded-full"></div>
+            <div>
+              <div id="statusText" class="font-semibold text-lg"></div>
+              <div id="statusUrl" class="text-sm text-gray-500"></div>
+            </div>
+          </div>
+          <div class="text-right">
+            <div id="statusCode" class="text-sm font-mono"></div>
+            <div id="responseTime" class="text-xs text-gray-500"></div>
+          </div>
+        </div>
+
+        <!-- 可用性统计 -->
+        <div id="uptimeDisplay" class="mt-4 text-center text-sm text-gray-600"></div>
+      </div>
+
+      <!-- 错误显示 -->
+      <div id="errorDisplay" class="mt-4 hidden">
+        <div class="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
+          <span id="errorText"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 嵌入代码 -->
+    <div id="embedSection" class="bg-white rounded-xl shadow-lg p-6 hidden">
+      <h2 class="text-xl font-semibold text-gray-900 mb-4">嵌入小部件</h2>
+      <p class="text-gray-600 mb-4">将以下代码复制到您的网站中：</p>
+
+      <!-- Tab -->
+      <div class="flex gap-2 mb-4">
+        <button class="tab-btn active px-4 py-2 text-sm font-medium rounded-lg bg-gray-100" data-tab="iframe">iframe</button>
+        <button class="tab-btn px-4 py-2 text-sm font-medium rounded-lg hover:bg-gray-100" data-tab="script">Script</button>
+      </div>
+
+      <!-- iframe 代码 -->
+      <div id="iframeTab" class="tab-content">
+        <div class="relative">
+          <pre id="iframeCode" class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm"></pre>
+          <button class="copy-btn absolute top-2 right-2 px-3 py-1 bg-gray-700 text-white text-xs rounded hover:bg-gray-600" data-target="iframeCode">复制</button>
+        </div>
+      </div>
+
+      <!-- script 代码 -->
+      <div id="scriptTab" class="tab-content hidden">
+        <div class="relative">
+          <pre id="scriptCode" class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm"></pre>
+          <button class="copy-btn absolute top-2 right-2 px-3 py-1 bg-gray-700 text-white text-xs rounded hover:bg-gray-600" data-target="scriptCode">复制</button>
+        </div>
+      </div>
+
+      <!-- 预览 -->
+      <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-3">预览</h3>
+      <div class="border rounded-lg p-4 bg-gray-50">
+        <iframe id="previewFrame" class="w-full h-16 rounded border-0" sandbox="allow-scripts"></iframe>
+      </div>
+    </div>
+
+    <!-- 功能说明 -->
+    <div class="grid md:grid-cols-3 gap-6 mt-12">
+      <div class="bg-white rounded-xl p-6 shadow-sm">
+        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+          <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <h3 class="font-semibold text-gray-900 mb-2">实时检测</h3>
+        <p class="text-gray-600 text-sm">即时检测 HTTP 端点状态，响应时间低至毫秒级。</p>
+      </div>
+      <div class="bg-white rounded-xl p-6 shadow-sm">
+        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+          <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+          </svg>
+        </div>
+        <h3 class="font-semibold text-gray-900 mb-2">轻松嵌入</h3>
+        <p class="text-gray-600 text-sm">一行 iframe 或 script 代码，即可在任何网站显示状态。</p>
+      </div>
+      <div class="bg-white rounded-xl p-6 shadow-sm">
+        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+          <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+          </svg>
+        </div>
+        <h3 class="font-semibold text-gray-900 mb-2">历史统计</h3>
+        <p class="text-gray-600 text-sm">记录历史检测结果，计算可用性百分比。</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="mt-16 py-8 border-t">
+    <div class="max-w-6xl mx-auto px-4 text-center text-gray-500 text-sm">
+      <p>Status Widget &copy; 2026 Auto Company. Built with simplicity in mind.</p>
+    </div>
+  </footer>
+
+  <script>
+    const API_BASE = window.location.origin;
+    const urlInput = document.getElementById('urlInput');
+    const checkBtn = document.getElementById('checkBtn');
+    const statusDisplay = document.getElementById('statusDisplay');
+    const embedSection = document.getElementById('embedSection');
+    const errorDisplay = document.getElementById('errorDisplay');
+
+    let currentUrl = '';
+    let checkInterval = null;
+
+    // 检查状态
+    async function checkStatus() {
+      const url = urlInput.value.trim();
+      if (!url) {
+        showError('请输入有效的 URL');
+        return;
+      }
+
+      currentUrl = url;
+      checkBtn.disabled = true;
+      checkBtn.textContent = '检查中...';
+      errorDisplay.classList.add('hidden');
+
+      try {
+        const response = await fetch(`${API_BASE}/api/check?url=${encodeURIComponent(url)}`);
+        const data = await response.json();
+
+        if (data.success) {
+          showStatus(data);
+          showEmbedCode(url);
+          startAutoCheck(url);
+        } else {
+          showError(data.error || '检查失败');
+        }
+      } catch (error) {
+        showError('网络请求失败，请稍后重试');
+      } finally {
+        checkBtn.disabled = false;
+        checkBtn.textContent = '检查状态';
+      }
+    }
+
+    // 显示状态
+    function showStatus(data) {
+      statusDisplay.classList.remove('hidden');
+
+      const indicator = document.getElementById('statusIndicator');
+      const statusText = document.getElementById('statusText');
+      const statusUrl = document.getElementById('statusUrl');
+      const statusCode = document.getElementById('statusCode');
+      const responseTime = document.getElementById('responseTime');
+      const uptimeDisplay = document.getElementById('uptimeDisplay');
+
+      if (data.isOnline) {
+        indicator.className = 'w-4 h-4 rounded-full bg-green-500 status-pulse';
+        statusText.textContent = '在线';
+        statusText.className = 'font-semibold text-lg text-green-700';
+        statusCode.textContent = `HTTP ${data.statusCode}`;
+        statusCode.className = 'text-sm font-mono text-green-600';
+      } else {
+        indicator.className = 'w-4 h-4 rounded-full bg-red-500';
+        statusText.textContent = '离线';
+        statusText.className = 'font-semibold text-lg text-red-700';
+        statusCode.textContent = data.error ? `错误: ${data.error}` : '无响应';
+        statusCode.className = 'text-sm font-mono text-red-600';
+      }
+
+      statusUrl.textContent = data.url;
+      responseTime.textContent = `${data.responseTime}ms`;
+
+      // 获取历史统计
+      fetchUptime(data.url);
+    }
+
+    // 获取可用性
+    async function fetchUptime(url) {
+      try {
+        const response = await fetch(`${API_BASE}/api/history?url=${encodeURIComponent(url)}`);
+        const data = await response.json();
+
+        if (data.success && data.history.length > 0) {
+          const online = data.history.filter(h => h.isOnline).length;
+          const uptime = Math.round((online / data.history.length) * 100);
+          document.getElementById('uptimeDisplay').textContent =
+            `基于 ${data.history.length} 次检测，可用性: ${uptime}%`;
+        }
+      } catch (error) {
+        // 忽略错误
+      }
+    }
+
+    // 显示错误
+    function showError(message) {
+      errorDisplay.classList.remove('hidden');
+      document.getElementById('errorText').textContent = message;
+      stopAutoCheck();
+    }
+
+    // 显示嵌入代码
+    function showEmbedCode(url) {
+      embedSection.classList.remove('hidden');
+
+      const encodedUrl = encodeURIComponent(url);
+      const widgetUrl = `${API_BASE}/widget?url=${encodedUrl}`;
+
+      // iframe 代码
+      document.getElementById('iframeCode').textContent =
+        `<iframe src="${widgetUrl}" width="200" height="60" frameborder="0" sandbox="allow-scripts"></iframe>`;
+
+      // script 代码
+      document.getElementById('scriptCode').textContent =
+        `<script src="${API_BASE}/widget.js?url=${encodedUrl}"><\/script>`;
+
+      // 更新预览
+      document.getElementById('previewFrame').src = widgetUrl;
+    }
+
+    // 自动检查
+    function startAutoCheck(url) {
+      stopAutoCheck();
+      checkInterval = setInterval(async () => {
+        try {
+          const response = await fetch(`${API_BASE}/api/check?url=${encodeURIComponent(url)}`);
+          const data = await response.json();
+          if (data.success) {
+            showStatus(data);
+          }
+        } catch (error) {
+          // 忽略错误
+        }
+      }, 30000); // 每30秒检查一次
+    }
+
+    function stopAutoCheck() {
+      if (checkInterval) {
+        clearInterval(checkInterval);
+        checkInterval = null;
+      }
+    }
+
+    // 事件绑定
+    checkBtn.addEventListener('click', checkStatus);
+    urlInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') checkStatus();
+    });
+
+    // Tab 切换
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active', 'bg-gray-200'));
+        btn.classList.add('active', 'bg-gray-200');
+
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+        document.getElementById(`${btn.dataset.tab}Tab`).classList.remove('hidden');
+      });
+    });
+
+    // 复制按钮
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const code = document.getElementById(btn.dataset.target).textContent;
+        navigator.clipboard.writeText(code).then(() => {
+          btn.textContent = '已复制!';
+          setTimeout(() => btn.textContent = '复制', 1500);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,21 +1,109 @@
 # Status Widget
 
-> HTTP 监控 + 状态页面小部件
+> 🚀 Self-hosted HTTP monitoring with embeddable status widget
 
-## 功能
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Cloudflare Workers](https://img.shields.io/badge/Cloudflare-Workers-orange)](https://workers.cloudflare.com/)
 
-- HTTP 端点监控
-- 实时状态显示
-- 可嵌入的状态小部件
-- 历史 uptime 统计
+## ✨ Features
 
-## 快速开始
+- **Real-time HTTP Monitoring** — Monitor any HTTP endpoint
+- **Embeddable Widget** — Add status to your site with iframe or script tag
+- **Response Time Tracking** — See how fast your site responds
+- **Historical Records** — Check past status changes
+- **Uptime Statistics** — Know your availability percentage
+
+## 🚀 Quick Start
 
 ```bash
+# Install dependencies
 npm install
-npm run dev
+
+# Start server
+npm start
 ```
 
-## License
+Visit http://localhost:3001
 
-MIT
+## 📦 Deploy to Cloudflare Workers
+
+```bash
+# Deploy to Cloudflare (free tier, 30 seconds)
+./deploy.sh
+```
+
+Requires [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/).
+
+## 🎯 Use Cases
+
+| Who | Why |
+|-----|-----|
+| **Indie Developers** | Statuspage.io @ $49/month is too expensive |
+| **SaaS Founders** | Need free monitoring at zero-revenue stage |
+| **Open Source Maintainers** | Want self-hosted solution |
+| **Learners** | Reference for Cloudflare Workers projects |
+
+## 📎 Embed Options
+
+### iframe
+
+```html
+<iframe src="https://your-domain.workers.dev/widget?url=example.com"
+        width="200"
+        height="60"
+        frameborder="0">
+</iframe>
+```
+
+### Script Tag
+
+```html
+<script src="https://your-domain.workers.dev/widget.js?url=example.com"></script>
+<div id="status-widget"></div>
+```
+
+## 🔌 API
+
+### Check Status
+
+```
+GET /api/check?url=<url>
+```
+
+Response:
+```json
+{
+  "success": true,
+  "url": "https://example.com",
+  "isOnline": true,
+  "statusCode": 200,
+  "responseTime": 123,
+  "timestamp": 1234567890
+}
+```
+
+### Get History
+
+```
+GET /api/history?url=<url>
+```
+
+Response:
+```json
+{
+  "success": true,
+  "url": "https://example.com",
+  "history": [
+    { "isOnline": true, "statusCode": 200, "responseTime": 123, "timestamp": 1234567890 },
+    { "isOnline": false, "statusCode": 0, "responseTime": 5000, "timestamp": 1234567880 }
+  ]
+}
+```
+
+## 📄 License
+
+MIT — Free for personal and commercial use.
+
+## 🙏 Acknowledgments
+
+Built by [Auto Company](https://github.com/auto-company) — An autonomous AI company experimenting with indie SaaS development.

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Status Widget</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); opacity: 0.7; }
+      50% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.7; }
+    }
+    .status-pulse {
+      animation: pulse-ring 2s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="m-0 p-0">
+  <div id="widget" class="flex items-center gap-3 px-4 py-3 bg-white rounded-lg shadow-sm border">
+    <div id="indicator" class="w-3 h-3 rounded-full bg-gray-300"></div>
+    <div class="flex-1 min-w-0">
+      <div id="status" class="text-sm font-medium text-gray-900 truncate">检查中...</div>
+      <div id="details" class="text-xs text-gray-500"></div>
+    </div>
+  </div>
+
+  <script>
+    const API_BASE = window.location.origin;
+    const params = new URLSearchParams(window.location.search);
+    const targetUrl = params.get('url');
+
+    if (!targetUrl) {
+      document.getElementById('status').textContent = '请提供 URL';
+    } else {
+      checkStatus();
+      setInterval(checkStatus, 60000); // 每分钟检查一次
+    }
+
+    async function checkStatus() {
+      try {
+        const response = await fetch(`${API_BASE}/api/check?url=${encodeURIComponent(targetUrl)}`);
+        const data = await response.json();
+
+        const indicator = document.getElementById('indicator');
+        const status = document.getElementById('status');
+        const details = document.getElementById('details');
+
+        if (data.isOnline) {
+          indicator.className = 'w-3 h-3 rounded-full bg-green-500 status-pulse';
+          status.textContent = '在线';
+          status.className = 'text-sm font-medium text-green-700 truncate';
+          details.textContent = `${data.responseTime}ms`;
+        } else {
+          indicator.className = 'w-3 h-3 rounded-full bg-red-500';
+          status.textContent = '离线';
+          status.className = 'text-sm font-medium text-red-700 truncate';
+          details.textContent = data.error || '无响应';
+        }
+      } catch (error) {
+        document.getElementById('indicator').className = 'w-3 h-3 rounded-full bg-gray-300';
+        document.getElementById('status').textContent = '检查失败';
+        document.getElementById('status').className = 'text-sm font-medium text-gray-500 truncate';
+      }
+    }
+  </script>
+</body>
+</html>
