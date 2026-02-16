@@ -17,12 +17,18 @@
   </style>
 </head>
 <body class="m-0 p-0">
-  <div id="widget" class="flex items-center gap-3 px-4 py-3 bg-white rounded-lg shadow-sm border">
-    <div id="indicator" class="w-3 h-3 rounded-full bg-gray-300"></div>
-    <div class="flex-1 min-w-0">
-      <div id="status" class="text-sm font-medium text-gray-900 truncate">检查中...</div>
-      <div id="details" class="text-xs text-gray-500"></div>
+  <div id="widget" class="flex flex-col items-center gap-3 px-4 py-3 bg-white rounded-lg shadow-sm border">
+    <div class="flex items-center gap-3 w-full">
+      <div id="indicator" class="w-3 h-3 rounded-full bg-gray-300"></div>
+      <div class="flex-1 min-w-0">
+        <div id="status" class="text-sm font-medium text-gray-900 truncate">检查中...</div>
+        <div id="details" class="text-xs text-gray-500"></div>
+      </div>
     </div>
+    <a href="https://github.com/ozxc44/status-widget" target="_blank" rel="noopener"
+       class="text-xs text-gray-400 hover:text-gray-600 no-underline">
+      Powered by Status Widget
+    </a>
   </div>
 
   <script>

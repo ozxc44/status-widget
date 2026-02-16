@@ -80,7 +80,27 @@
     container.appendChild(indicator);
     container.appendChild(textContainer);
 
-    return { container, indicator, statusText, detailsText };
+    // Powered by 链接
+    const poweredBy = document.createElement('a');
+    poweredBy.href = 'https://github.com/ozxc44/status-widget';
+    poweredBy.target = '_blank';
+    poweredBy.rel = 'noopener';
+    poweredBy.textContent = 'Powered by Status Widget';
+    poweredBy.style.cssText = `
+      font-size: 10px;
+      color: #9ca3af;
+      text-decoration: none;
+      margin-top: 4px;
+    `;
+    poweredBy.onmouseover = function() { this.style.color = '#6b7280'; };
+    poweredBy.onmouseout = function() { this.style.color = '#9ca3af'; };
+
+    const wrapper = document.createElement('div');
+    wrapper.style.cssText = 'display: flex; flex-direction: column; align-items: center;';
+    wrapper.appendChild(container);
+    wrapper.appendChild(poweredBy);
+
+    return { wrapper, container, indicator, statusText, detailsText };
   }
 
   // 检查状态
@@ -150,11 +170,11 @@
 
     if (container) {
       // 使用现有容器
-      container.appendChild(elements.container);
+      container.appendChild(elements.wrapper);
     } else {
       // 插入到脚本位置
       const script = document.currentScript;
-      script.parentNode.insertBefore(elements.container, script.nextSibling);
+      script.parentNode.insertBefore(elements.wrapper, script.nextSibling);
     }
 
     // 初始检查
