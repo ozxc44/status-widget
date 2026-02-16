@@ -1,69 +1,107 @@
 # Status Widget
 
-> 🚀 Self-hosted HTTP monitoring with embeddable status widget
+> 🚀 **Self-hosted HTTP monitoring with embeddable status widget** — Free, lightweight, privacy-focused
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Cloudflare Workers](https://img.shields.io/badge/Cloudflare-Workers-orange)](https://workers.cloudflare.com/)
 [![Size](https://img.shields.io/github/languages/code-size/ozxc44/status-widget?style=flat)](https://github.com/ozxc44/status-widget)
 [![Stars](https://img.shields.io/github/stars/ozxc44/status-widget?style=social)](https://github.com/ozxc44/status-widget/stargazers)
-[![Statuspage.io Alternative](https://img.shields.io/badge/Alternative_to-Statuspage.io-blue)](https://www.statuspage.io/)
 
-## ✨ Features
+---
 
-- **Real-time HTTP Monitoring** — Monitor any HTTP endpoint
-- **Embeddable Widget** — Add status to your site with iframe or script tag
-- **Response Time Tracking** — See how fast your site responds
-- **Historical Records** — Check past status changes
-- **Uptime Statistics** — Know your availability percentage
+## 🎯 Why?
 
-## 🚀 Quick Start
+**Statuspage.io costs $49/month.** That's too much when you're starting out.
+
+**Status Widget is free forever.** Self-host it, embed it, own your data.
+
+---
+
+## ✨ What It Does
+
+| Feature | Description |
+|---------|-------------|
+| **Real-time Monitoring** | Check any HTTP endpoint every 60 seconds |
+| **Embeddable Widget** | Add status to your site with one line of code |
+| **Response Time** | See how fast your site responds |
+| **History** | Check past status changes |
+| **Uptime %** | Know your availability |
+
+---
+
+## 🚀 30-Second Setup
 
 ```bash
-# Install dependencies
+# Clone
+git clone https://github.com/ozxc44/status-widget.git
+cd status-widget
+
+# Install
 npm install
 
-# Start server
+# Start
 npm start
 ```
 
 Visit http://localhost:3001
 
-## 📦 Deploy to Cloudflare Workers
+**Live Demo**: https://status.zhuzeyang.xyz
+
+---
+
+## 📦 Deploy Anywhere
+
+### Deploy to Your Server
 
 ```bash
-# Deploy to Cloudflare (free tier, 30 seconds)
 ./deploy.sh
 ```
 
-Requires [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/).
+Requires Node.js. Configure `deploy.sh` with your server details.
+
+### Deploy to Cloudflare Workers (Free)
+
+1. Install Wrangler: `npm install -g wrangler`
+2. Login: `wrangler login`
+3. Deploy: `wrangler publish`
+
+---
 
 ## 🎯 Use Cases
 
 | Who | Why |
 |-----|-----|
-| **Indie Developers** | Statuspage.io @ $49/month is too expensive |
-| **SaaS Founders** | Need free monitoring at zero-revenue stage |
-| **Open Source Maintainers** | Want self-hosted solution |
-| **Learners** | Reference for Cloudflare Workers projects |
+| **Indie Hackers** | $49/mo is too much for a side project |
+| **SaaS Startups** | Need free monitoring at zero-revenue stage |
+| **Open Source** | Want self-hosted, no vendor lock-in |
+| **Privacy** | Keep your data on your own servers |
 
-## 📎 Embed Options
+---
 
-### iframe
+## 📎 Embed on Your Site
+
+### Option 1: Script Tag (Recommended)
 
 ```html
-<iframe src="https://your-domain.workers.dev/widget?url=example.com"
-        width="200"
-        height="60"
-        frameborder="0">
+<script src="https://your-domain.com/widget.js?url=example.com"></script>
+<div id="status-widget"></div>
+```
+
+### Option 2: iframe
+
+```html
+<iframe src="https://your-domain.com/widget?url=example.com"
+        width="200" height="60" frameborder="0">
 </iframe>
 ```
 
-### Script Tag
+### Result
 
-```html
-<script src="https://your-domain.workers.dev/widget.js?url=example.com"></script>
-<div id="status-widget"></div>
-```
+A clean status badge showing:
+- 🟢 Online / 🔴 Offline
+- Response time in ms
+- "Powered by Status Widget" link
+
+---
 
 ## 🔌 API
 
@@ -103,16 +141,44 @@ Response:
 }
 ```
 
+---
+
+## 🆚 Alternatives
+
+| | Status Widget | Statuspage.io | Uptime Kuma |
+|---|---|---|---|
+| **Price** | Free | $49+/mo | Free (self-hosted) |
+| **Hosted** | No | Yes | No |
+| **Setup Time** | 30 sec | 5 min | 10+ min |
+| **Widget** | Yes | Yes | No |
+| **Alerts** | Coming soon | Yes | Yes |
+
+---
+
+## 🗺️ Roadmap
+
+- [ ] Email alerts when site goes down
+- [ ] Slack/Discord webhook integration
+- [ ] Custom check intervals
+- [ ] Dark mode widget
+- [ ] Historical uptime graphs
+
+**Vote on features:** [GitHub Issues](https://github.com/ozxc44/status-widget/issues)
+
+---
+
 ## 📄 License
 
 MIT — Free for personal and commercial use.
 
-## 🔗 Related Projects
-
-Also check out:
-- **[Queue Monitor](https://github.com/ozxc44/queue-monitor-dev)** — Queue alerting for RQ, Celery, BullMQ, Sidekiq
-- **[Cron Monitor](https://github.com/ozxc44/cron-monitor)** — Cron job monitoring and alerting
+---
 
 ## 🙏 Acknowledgments
 
 Built by [Auto Company](https://github.com/auto-company) — An autonomous AI company experimenting with indie SaaS development.
+
+---
+
+**⭐ Star us on GitHub** — It helps more people discover Status Widget!
+
+[https://github.com/ozxc44/status-widget](https://github.com/ozxc44/status-widget)
